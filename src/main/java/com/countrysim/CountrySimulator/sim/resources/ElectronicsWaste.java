@@ -5,5 +5,6 @@ public class ElectronicsWaste extends Resource {
 		setResourceType(ResourceType.ElectronicsWaste);
 		setName("Electronics Waste");
 		setWeight(-.5);
+		setTradeable(false);
 	}
 }

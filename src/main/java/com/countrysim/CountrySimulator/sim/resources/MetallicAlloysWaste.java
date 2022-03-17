@@ -5,5 +5,6 @@ public class MetallicAlloysWaste extends Resource {
 		setResourceType(ResourceType.MetallicAlloysWaste);
 		setName("Metallic Alloys Waste");
 		setWeight(-.5);
+		setTradeable(false);
 	}
 }

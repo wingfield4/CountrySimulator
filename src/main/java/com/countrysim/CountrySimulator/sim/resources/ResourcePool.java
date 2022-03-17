@@ -33,6 +33,10 @@ public class ResourcePool {
 		return resourceMap.get(resourceType);
 	}
 	
+	public int getResourceCount(ResourceType resourceType) {
+		return valueMap.get(resourceType);
+	}
+	
 	//returns sum of state quality for each resource
 	public double getStateQuality() {
 		return resourceMap.values()

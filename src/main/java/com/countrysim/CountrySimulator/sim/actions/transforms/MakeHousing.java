@@ -6,6 +6,8 @@ import com.countrysim.CountrySimulator.sim.resources.ResourceType;
 public class MakeHousing extends Transform {
 	public MakeHousing(Country country) {
 		super(country);
+		setName("Make Housing");
+		setDescription("Turn Metallic Alloys, Metallic Elements, and Timber into Housing");
 		
 		//requirements
 		this.addResourceRequirement(ResourceType.MetallicAlloys, 3);

@@ -16,7 +16,9 @@ public class GameMaster {
 	CountryPool countryPool = new CountryPool();
 
 	//custom initialization
-	public void initialize(int numberOfCountries) {
+	public void initialize() {
+		int numberOfCountries = Config.NUMBER_OF_COUNTRIES;
+		
 		//set up the countries
 		IntStream.range(0, numberOfCountries)
 			.forEach(index -> {
@@ -40,4 +42,7 @@ public class GameMaster {
 	}
 	
 	//csv initialization
+	
+	//getters and setters
+	public CountryPool getCountryPool() { return countryPool; }
 }

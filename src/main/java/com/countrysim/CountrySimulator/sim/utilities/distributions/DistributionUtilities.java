@@ -44,4 +44,20 @@ public class DistributionUtilities {
     {
         return Utilities.random.nextInt(maxValue - minValue) + minValue;
     }
+    
+    /* EXPONENTIONAL DISTRIBUTION */
+    public static double exponentialDistribution(double minValue, double maxValue)
+    {
+        double lambda = 1.0;
+        double scale = 5.8 / lambda; //99.7th percential
+        double x = Utilities.random.nextDouble() * scale;
+
+        double unscaledValue = Math.exp(lambda*(-x)); //value from 0.0 - 1.0
+        return unscaledValue * (maxValue - minValue) + minValue; //scale to our min/max values
+    }
+
+    public static int ExponentialDistribution(int minValue, int maxValue)
+    {
+        return (int)Math.round(exponentialDistribution((double)minValue, maxValue));
+    }
 }

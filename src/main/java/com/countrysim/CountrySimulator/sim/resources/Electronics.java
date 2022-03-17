@@ -4,6 +4,6 @@ public class Electronics extends Resource {
 	public Electronics() {
 		setResourceType(ResourceType.Electronics);
 		setName("Electronics");
-		setWeight(3);
+		setWeight(5);
 	}
 }

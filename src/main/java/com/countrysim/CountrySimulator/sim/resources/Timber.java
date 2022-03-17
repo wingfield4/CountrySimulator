@@ -4,6 +4,6 @@ public class Timber extends Resource {
 	public Timber() {
 		setResourceType(ResourceType.Timber);
 		setName("Timber");
-		setWeight(.5);
+		setWeight(1);
 	}
 }

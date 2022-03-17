@@ -5,5 +5,6 @@ public class HousingWaste extends Resource {
 		setResourceType(ResourceType.HousingWaste);
 		setName("Housing Waste");
 		setWeight(-.5);
+		setTradeable(false);
 	}
 }

@@ -6,6 +6,8 @@ import com.countrysim.CountrySimulator.sim.resources.ResourceType;
 public class MakeMetallicAlloys extends Transform {
 	public MakeMetallicAlloys(Country country) {
 		super(country);
+		setName("Make Metallic Alloys");
+		setDescription("Turn Metallic Elements into Metallic Alloys");
 		
 		//requirements
 		this.addResourceRequirement(ResourceType.MetallicElements, 2);
