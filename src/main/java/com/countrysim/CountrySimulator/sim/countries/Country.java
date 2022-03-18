@@ -27,7 +27,7 @@ public class Country {
 	
 	public void initialize() {
 		oracle = OracleFactory.create(Config.ORACLE_TYPE, this);
-		prophecy = oracle.foresee(20);
+		prophecy = oracle.foresee(Config.SEARCH_DEPTH);
 		System.out.println();
 	}
 	

@@ -41,10 +41,10 @@ public class Transfer extends Action {
 				sendingAmount = (int)(available * .25);
 				break;
 			case TransferHalf:
-				sendingAmount = (int)(available * .25);
+				sendingAmount = (int)(available * .5);
 				break;
 			case TransferMost:
-				sendingAmount = (int)(available * .25);
+				sendingAmount = (int)(available * .75);
 				break;
 		}
 		
@@ -55,6 +55,9 @@ public class Transfer extends Action {
 	public boolean isValid() {
 		var sendingResource = ResourceFactory.create(sendingResourceType);
 		var receivingResource = ResourceFactory.create(receivingResourceType);
+		
+		if(sendingAmount == 0 || receivingAmount == 0)
+			return false;
 		
 		//fails if sending resource is not tradeable
 		if(!sendingResource.isTradeable())

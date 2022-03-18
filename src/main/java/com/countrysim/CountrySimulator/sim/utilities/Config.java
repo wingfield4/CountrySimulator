@@ -15,6 +15,7 @@ public class Config {
 	public static final int NUMBER_OF_COUNTRIES = 10;
 	
 	public static final OracleType ORACLE_TYPE = OracleType.BFRPOracle;
+	public static final int SEARCH_DEPTH = 30;
 	
 	public static final List<String> COUNTRY_NAMES = Arrays.asList(
 			"Atraria",
@@ -50,7 +51,7 @@ public class Config {
 			makeEntry(ResourceType.Population, new NormalDistribution(1, 40)),
 			makeEntry(ResourceType.Electronics, new NormalDistribution(0, 0)),
 			makeEntry(ResourceType.ElectronicsWaste, new NormalDistribution(0, 0)),
-			makeEntry(ResourceType.Housing, new NormalDistribution(1, 40)),
+			makeEntry(ResourceType.Housing, new NormalDistribution(1, 10)),
 			makeEntry(ResourceType.HousingWaste, new NormalDistribution(0, 0)),
 			makeEntry(ResourceType.MetallicAlloys, new NormalDistribution(0, 0)),
 			makeEntry(ResourceType.MetallicAlloysWaste, new NormalDistribution(0, 0)),

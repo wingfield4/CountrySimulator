@@ -30,14 +30,28 @@ public class Prophecy {
 		quality = this.finalCountryState.getResourcePool().getStateQuality();
 	}
 	
-	public boolean isDescendant(Prophecy parent) {
-		return parent.getLevel() == 0 || (getLevel() > parent.getLevel() &&
-				parent.getSteps().get(parent.getLevel() - 1) == getSteps().get(parent.getLevel() - 1));
+	public boolean isDescendant(Prophecy ancestor) {
+		return ancestor.getLevel() == 0 || (getLevel() > ancestor.getLevel() &&
+				ancestor.getSteps().get(ancestor.getLevel() - 1) == getSteps().get(ancestor.getLevel() - 1));
 	}
 	
+	public boolean isAncestor(Prophecy descendant) {
+		return getLevel() == 0 || (getLevel() < descendant.getLevel() &&
+				descendant.getSteps().get(getLevel() - 1) == getSteps().get(getLevel() - 1));
+	}
+	 
+	//ok the family analogy breaks down a little here but this makes sense I promise
 	public boolean isSibling(Prophecy sibling) {
-		return getLevel() > 1 && sibling.getLevel() > 1 && getLevel() == sibling.getLevel() &&
-				sibling.getSteps().get(getLevel() - 2) == getSteps().get(getLevel() - 2);
+		return isCousin(sibling, 1);
+	}
+	
+	public boolean isCousin(Prophecy cousin, int depthToCheck) {
+		return getLevel() > depthToCheck && cousin.getLevel() > depthToCheck && getLevel() == cousin.getLevel() &&
+				cousin.getSteps().get(getLevel() - depthToCheck - 1) == getSteps().get(getLevel() - depthToCheck - 1);
+	}
+	
+	public boolean isRelated(Prophecy relative, int depthToCheck) {
+		return isDescendant(relative) || isAncestor(relative) || isCousin(relative, depthToCheck);
 	}
 	
 	//getters and setters
