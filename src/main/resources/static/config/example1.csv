@@ -1,0 +1,4 @@
+Country,Population,Electronics,ElectronicsWaste,Housing,HousingWaste,MetallicAlloys,MetallicAlloysWaste,MetallicElements,Timber
+TestCountry1,30,10,0,20,0,100,0,10,100
+TestCountry2,30,10,0,20,0,100,0,10,100
+TestCountry3,30,10,0,20,0,100,0,10,100
