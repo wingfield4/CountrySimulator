@@ -21,7 +21,7 @@ public class SimpleBeamOracle implements Oracle {
 	}
 	
 	public Prophecy foresee(int maxDepth) {
-		int MAX_FRONTIER = 10000;
+		int MAX_FRONTIER = 3000;
 		
 		int depth = 0;
 		List<Prophecy> frontier = new ArrayList<Prophecy>();

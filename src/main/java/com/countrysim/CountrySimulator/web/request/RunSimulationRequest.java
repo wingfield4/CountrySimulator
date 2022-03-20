@@ -38,7 +38,7 @@ public class RunSimulationRequest {
 	public void setSearchDepth(int searchDepth) { this.searchDepth = searchDepth; }
 
 	public double getDiscountGamma() { return discountGamma; }
-	public void setDiscountGamma(int discountGamma) { this.discountGamma = discountGamma; }
+	public void setDiscountGamma(double discountGamma) { this.discountGamma = discountGamma; }
 
 	public int getDiscountOffset() { return discountOffset; }
 	public void getDiscountOffset(int discountOffset) { this.discountOffset = discountOffset; }

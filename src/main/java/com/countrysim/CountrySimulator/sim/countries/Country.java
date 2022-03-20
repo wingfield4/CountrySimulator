@@ -16,6 +16,8 @@ public class Country {
 	private ResourcePool resourcePool;
 	private CountryPool countryPool;
 	
+	private long computeTime;
+	
 	public Country(String name) {
 		this.name = name;
 		resourcePool = new ResourcePool();
@@ -30,7 +32,10 @@ public class Country {
 	
 	public void initialize() {
 		oracle = OracleFactory.create(Config.ORACLE_TYPE, this);
+		long start = System.nanoTime();
 		prophecy = oracle.foresee(Config.SEARCH_DEPTH);
+		long end = System.nanoTime();
+		computeTime = end - start;
 		System.out.println();
 	}
 	
@@ -44,4 +49,6 @@ public class Country {
 	@JsonIgnore
 	public CountryPool getCountryPool() { return countryPool; }
 	public void setCountryPool(CountryPool countryPool) { this.countryPool = countryPool; }
+	
+	public long getComputeTime() { return computeTime; }
 }

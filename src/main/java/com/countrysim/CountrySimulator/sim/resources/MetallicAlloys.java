@@ -4,6 +4,6 @@ public class MetallicAlloys extends Resource {
 	public MetallicAlloys() {
 		setResourceType(ResourceType.MetallicAlloys);
 		setName("Metallic Alloys");
-		setWeight(3);
+		setWeight(2.75);
 	}
 }

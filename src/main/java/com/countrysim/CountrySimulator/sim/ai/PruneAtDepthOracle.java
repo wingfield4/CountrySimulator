@@ -19,7 +19,7 @@ public class PruneAtDepthOracle implements Oracle {
 	}
 	
 	public Prophecy foresee(int maxDepth) {
-		int PRUNING_DEPTH = 3;
+		int PRUNING_DEPTH = 2;
 		int SURVIVING_NODES = 6;
 		
 		int depth = 0;
