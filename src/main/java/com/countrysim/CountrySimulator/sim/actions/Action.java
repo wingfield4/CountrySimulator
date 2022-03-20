@@ -7,7 +7,7 @@ public abstract class Action {
 	private String id;
 	private String name;
 	private String description;
-	private double stateQualityModifier = 1.0;
+	private double probabilityOfSuccess = 1.0;
 	
 	public abstract boolean isValid();
 	public abstract boolean execute();
@@ -23,8 +23,8 @@ public abstract class Action {
 	public String getDescription() { return description; }
 	public void setDescription(String description) { this.description = description; }
 	
-	public double getStateQualityModifier() { return stateQualityModifier; }
-	public void setStateQualityModifier(double stateQualityModifier) { this.stateQualityModifier = stateQualityModifier; }
+	public double getProbabilityOfSucces() { return probabilityOfSuccess; }
+	public void setProbabilityOfSuccess(double probabilityOfSuccess) { this.probabilityOfSuccess = probabilityOfSuccess; }
 	
 	public ResourcePool getResultResourcePool() { return tryExecute().getResourcePool(); }
 }

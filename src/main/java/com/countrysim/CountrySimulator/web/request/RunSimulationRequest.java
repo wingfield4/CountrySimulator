@@ -7,6 +7,10 @@ public class RunSimulationRequest {
 	private int numberOfCountries;
 	private int searchDepth;
 	
+	private double discountGamma;
+	private int discountOffset;
+	private int probabilityPenalty;
+	
 	private int[] electronicsRange;
 	private int[] electronicsWasteRange;
 	private int[] housingRange;
@@ -32,6 +36,15 @@ public class RunSimulationRequest {
 
 	public int getSearchDepth() { return searchDepth; }
 	public void setSearchDepth(int searchDepth) { this.searchDepth = searchDepth; }
+
+	public double getDiscountGamma() { return discountGamma; }
+	public void setDiscountGamma(int discountGamma) { this.discountGamma = discountGamma; }
+
+	public int getDiscountOffset() { return discountOffset; }
+	public void getDiscountOffset(int discountOffset) { this.discountOffset = discountOffset; }
+
+	public int getProbabilityPenalty() { return probabilityPenalty; }
+	public void setProbabilityPenalty(int probabilityPenalty) { this.probabilityPenalty = probabilityPenalty; }
 	
 	public int[] getElectronicsRange() { return electronicsRange; }
 	public void setElectronicsRange(int[] electronicsRange) { this.electronicsRange = electronicsRange; }

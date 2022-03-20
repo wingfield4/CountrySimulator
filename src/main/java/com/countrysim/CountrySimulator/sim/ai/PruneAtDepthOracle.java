@@ -25,7 +25,7 @@ public class PruneAtDepthOracle implements Oracle {
 		int depth = 0;
 		int depthSincePruning = 0;
 		Queue<Prophecy> frontier = new LinkedList<Prophecy>();
-		frontier.add(new Prophecy(new ArrayList<Action>(), new Country(country)));
+		frontier.add(new Prophecy(country, new ArrayList<Action>(), new Country(country)));
 		
 		while(depth < maxDepth) {
 			//do some kind of pruning at a certain point
@@ -33,7 +33,7 @@ public class PruneAtDepthOracle implements Oracle {
 				Prophecy[] newFrontier = new Prophecy[SURVIVING_NODES];
 				
 				List<Prophecy> sortedFrontier = frontier.stream()
-					.sorted((x, y) -> Double.compare(y.getQuality(), x.getQuality()))
+					.sorted((x, y) -> Double.compare(y.getExpectedUtility(), x.getExpectedUtility()))
 					.collect(Collectors.toList());
 				
 				for(var prophecy : sortedFrontier) {
@@ -57,7 +57,7 @@ public class PruneAtDepthOracle implements Oracle {
 				}
 				
 				frontier = Stream.of(newFrontier)
-						.filter(prophect -> prophect != null)
+						.filter(prophecy -> prophecy != null)
 						.collect(Collectors.toCollection(LinkedList::new));
 				
 				depthSincePruning = 0;
@@ -71,7 +71,7 @@ public class PruneAtDepthOracle implements Oracle {
 				if(prevProphecy.getLevel() == depth) {
 					for(Action nextAction : ActionFactory.createFullActionList(prevProphecy.getFinalCountryState())) {
 						if(nextAction.isValid())
-							frontier.add(new Prophecy(prevProphecy, nextAction));
+							frontier.add(new Prophecy(country, prevProphecy, nextAction));
 					}
 				}
 			}
@@ -81,7 +81,7 @@ public class PruneAtDepthOracle implements Oracle {
 		}
 		
 		return frontier.stream()
-				.max((x, y) -> Double.compare(x.getQuality(), y.getQuality()))
+				.max((x, y) -> Double.compare(x.getExpectedUtility(), y.getExpectedUtility()))
 				.orElse(null);
 	}
 }

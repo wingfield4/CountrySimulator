@@ -25,22 +25,23 @@ public class SimpleBeamOracle implements Oracle {
 		
 		int depth = 0;
 		List<Prophecy> frontier = new ArrayList<Prophecy>();
-		frontier.add(new Prophecy(new ArrayList<Action>(), new Country(country)));
+		frontier.add(new Prophecy(country, new ArrayList<Action>(), new Country(country)));
 		
 		while(depth < maxDepth) {
 			final int currentDepth = depth;
 			frontier = frontier.parallelStream()
 					.flatMap(prevProphecy -> {
 						if(prevProphecy.getLevel() == currentDepth) {
-							return ActionFactory.createFullActionList(prevProphecy.getFinalCountryState())
-									.stream()
-									.filter(Action::isValid)
-									.map(action -> new Prophecy(prevProphecy, action));
+							return Stream.concat(Stream.of(prevProphecy), 
+									ActionFactory.createFullActionList(prevProphecy.getFinalCountryState())
+										.stream()
+										.filter(Action::isValid)
+										.map(action -> new Prophecy(country, prevProphecy, action)));
 						}
 						
-						return Stream.empty();
+						return Stream.of(prevProphecy);
 					})
-					.sorted((x, y) -> Double.compare(y.getQuality(), x.getQuality()))
+					.sorted((x, y) -> Double.compare(y.getExpectedUtility(), x.getExpectedUtility()))
 					.limit(MAX_FRONTIER)
 					.collect(Collectors.toList());
 				
@@ -48,7 +49,7 @@ public class SimpleBeamOracle implements Oracle {
 		}
 		
 		return frontier.stream()
-				.max((x, y) -> Double.compare(x.getQuality(), y.getQuality()))
+				.max((x, y) -> Double.compare(x.getExpectedUtility(), y.getExpectedUtility()))
 				.orElse(null);
 	}
 }

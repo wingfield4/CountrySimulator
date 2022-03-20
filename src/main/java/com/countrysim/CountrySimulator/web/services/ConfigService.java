@@ -22,6 +22,10 @@ public class ConfigService {
 		Config.SEARCH_DEPTH = request.getSearchDepth();
 		Config.ORACLE_TYPE = Config.ORACLE_NAME_MAP.get(request.getOracle());
 		
+		Config.DISCOUNT_GAMMA = request.getDiscountGamma();
+		Config.DISCOUNT_OFFSET = request.getDiscountOffset();
+		Config.PROBABILITY_PENALTY = request.getProbabilityPenalty();
+		
 		//adjust resource distributions
 		Config.RESOURCE_DISTRIBUTIONS
 			.replace(ResourceType.Electronics, new NormalDistribution(request.getElectronicsRange()[0], request.getElectronicsRange()[1]));

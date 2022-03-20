@@ -51,6 +51,7 @@ public class Transfer extends Action {
 		
 		double resourceRatio = sendingResource.getWeight()/receivingResource.getWeight();
 		receivingAmount = (int)(sendingAmount*resourceRatio*RECEIVING_AMOUNT_RATIO);
+		this.setProbabilityOfSuccess(.999);
 		
 		//adjust receiving amount based on resources in world
 		int highestSingleCountryAmount = 0;
@@ -65,15 +66,18 @@ public class Transfer extends Action {
 		}
 
 		if(worldAmount < receivingAmount) {
-			receivingAmount = 0;
+			this.setProbabilityOfSuccess(.1);
 		} else if(highestSingleCountryAmount < receivingAmount) {
-			receivingAmount = highestSingleCountryAmount;
+			receivingAmount = highestSingleCountryAmount; //adjust receiving amount
 		}
 	}
 	
 	public boolean isValid() {
 		var sendingResource = ResourceFactory.create(sendingResourceType);
 		var receivingResource = ResourceFactory.create(receivingResourceType);
+		
+		if(this.getProbabilityOfSucces() <= 0)
+			return false;
 		
 		if(sendingAmount == 0 || receivingAmount == 0)
 			return false;

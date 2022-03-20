@@ -6,27 +6,72 @@ import java.util.stream.Stream;
 
 import com.countrysim.CountrySimulator.sim.actions.Action;
 import com.countrysim.CountrySimulator.sim.countries.Country;
+import com.countrysim.CountrySimulator.sim.utilities.Config;
 
 public class Prophecy {
 	private List<Action> steps;
+	private Country country;
 	private Country finalCountryState;
-	private double quality;
+
+	private double stateQuality;
+	private double undiscountedReward;
+	private double discountedReward;
+	private double probability;
+	private double expectedUtility;
 	
 	//create one fresh
-	public Prophecy(List<Action> steps, Country countryState) {
+	public Prophecy(Country country, List<Action> steps, Country countryState) {
+		this.country = country;
 		this.steps = steps;
 		this.finalCountryState = countryState;
-				
-		this.quality = countryState.getResourcePool().getStateQuality();
+		
+		calculateValues();
 	}
 	
 	//create an extension off another prophecy
-	public Prophecy(Prophecy prevProphecy, Action nextAction) {
+	public Prophecy(Country country, Prophecy prevProphecy, Action nextAction) {
+		this.country = country;
 		steps = Stream.concat(prevProphecy.getSteps().stream(), Stream.of(nextAction))
 				.collect(Collectors.toList());
 		
 		this.finalCountryState = nextAction.tryExecute();
-		quality = this.finalCountryState.getResourcePool().getStateQuality();
+		calculateValues();
+	}
+	
+	private void calculateValues() {
+		calculateStateQuality();
+		calculateUndiscountedReward();
+		calculateDiscountedReward();
+		calculateProbability();
+		calculateExpectedUtility();
+	}
+	
+	private void calculateStateQuality() {
+		stateQuality = finalCountryState.getResourcePool().getStateQuality();
+	}
+	
+	private void calculateUndiscountedReward() {
+		undiscountedReward = stateQuality - country.getResourcePool().getStateQuality();
+	}
+	
+	private void calculateDiscountedReward() {
+		int offset = Config.DISCOUNT_OFFSET; //don't affect score until past this many steps
+		double gamma = Config.DISCOUNT_GAMMA;
+		int adjustedLevel = Math.max(0, getLevel() - offset);
+		
+		discountedReward = Math.pow(gamma, adjustedLevel) * undiscountedReward;
+	}
+	
+	private void calculateProbability() {
+		probability = getSteps().stream()
+				.mapToDouble(action -> action.getProbabilityOfSucces())
+				.reduce(1.0, (probA, probB) -> probA * probB);
+	}
+	
+	private void calculateExpectedUtility() {
+		double penalty = Config.PROBABILITY_PENALTY;
+		
+		expectedUtility = (probability * discountedReward) + ((1 - probability) * penalty);
 	}
 	
 	public boolean isDescendant(Prophecy ancestor) {
@@ -57,5 +102,10 @@ public class Prophecy {
 	public List<Action> getSteps() { return steps; }
 	public int getLevel() { return getSteps().size(); }
 	public Country getFinalCountryState() { return finalCountryState; }
-	public double getQuality() { return quality; }
+	
+	public double getStateQuality() { return stateQuality; }
+	public double getUndiscountedReward() { return undiscountedReward; }
+	public double getDiscountedReward() { return discountedReward; }
+	public double getProbability() { return probability; }
+	public double getExpectedUtility() { return expectedUtility; }
 }

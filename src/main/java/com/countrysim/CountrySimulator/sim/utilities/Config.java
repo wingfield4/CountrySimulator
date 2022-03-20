@@ -17,6 +17,11 @@ public class Config {
 	public static String CONFIG_FILE_NAME;
 	public static int NUMBER_OF_COUNTRIES = 10;
 	public static int SEARCH_DEPTH = 30;
+	
+	//expected utility function constants
+	public static double DISCOUNT_GAMMA = .999;
+	public static int DISCOUNT_OFFSET = 10;
+	public static double PROBABILITY_PENALTY = -50;
 
 	public static OracleType ORACLE_TYPE = OracleType.SIMPLE_BEAM_ORACLE;
 	public static Map<String, OracleType> ORACLE_NAME_MAP = new HashMap<>(Map.ofEntries(
