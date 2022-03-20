@@ -1,11 +1,7 @@
 Country,Population,Electronics,ElectronicsWaste,Housing,HousingWaste,MetallicAlloys,MetallicAlloysWaste,MetallicElements,Timber
 Atraria,5,0,0,5,0,0,0,1000,1000
-Braogua,10,200,0,10,0,200,0,0,0
-Cluic Stistan,5,0,0,0,0,0,0,1000,1000
-Doshaibia,20,0,0,20,0,0,0,1000,1000
-Eshua,25,0,0,25,0,0,0,1000,1000
-Flaosau,30,0,0,20,0,0,0,1000,1000
-Gloesal,35,0,0,25,0,0,0,1000,1000
-Hestar,40,0,0,30,0,0,0,1000,1000
-Iapreistan,45,0,0,35,0,0,0,1000,1000
-Jaspiadan,50,0,0,20,0,0,0,1000,1000
+Braogua,10,400,0,10,0,400,0,0,0
+Cluic Stistan,5,0,0,0,0,0,0,100,100
+Doshaibia,20,0,0,20,0,0,0,100,100
+Iapreistan,45,0,0,0,0,0,0,1000,1000
+Jaspiadan,50,0,0,0,0,0,0,1000,1000
