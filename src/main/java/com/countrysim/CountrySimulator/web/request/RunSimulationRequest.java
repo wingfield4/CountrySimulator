@@ -3,6 +3,7 @@ package com.countrysim.CountrySimulator.web.request;
 public class RunSimulationRequest {
 	private String generationMethod;
 	private String configFileName;
+	private String oracle;
 	private int numberOfCountries;
 	private int searchDepth;
 	
@@ -22,6 +23,9 @@ public class RunSimulationRequest {
 	
 	public String getConfigFileName() { return configFileName; }
 	public void setConfigFileName(String configFileName) { this.configFileName = configFileName; }
+	
+	public String getOracle() { return oracle; }
+	public void setOracle(String oracle) { this.oracle = oracle; }
 
 	public int getNumberOfCountries() { return numberOfCountries; }
 	public void setNumberOfCountries(int numberOfCountries) { this.numberOfCountries = numberOfCountries; }

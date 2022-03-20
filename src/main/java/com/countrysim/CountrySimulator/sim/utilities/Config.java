@@ -16,8 +16,13 @@ public class Config {
 	public static GenerationMethod GENERATION_METHOD = GenerationMethod.Generated;
 	public static String CONFIG_FILE_NAME;
 	public static int NUMBER_OF_COUNTRIES = 10;
-	public static OracleType ORACLE_TYPE = OracleType.BFRPOracle;
 	public static int SEARCH_DEPTH = 30;
+
+	public static OracleType ORACLE_TYPE = OracleType.SIMPLE_BEAM_ORACLE;
+	public static Map<String, OracleType> ORACLE_NAME_MAP = new HashMap<>(Map.ofEntries(
+			makeEntry("PruneAtDepthOracle", OracleType.PRUNE_AT_DEPTH_ORACLE),
+			makeEntry("SimpleBeamOracle", OracleType.SIMPLE_BEAM_ORACLE)
+		));
 	
 	public static List<String> COUNTRY_NAMES = Arrays.asList(
 			"Atraria",
@@ -80,5 +85,9 @@ public class Config {
 	
 	private static Entry<String, ResourceType> makeEntry(String resourceName, ResourceType resourceType) {
 		return new AbstractMap.SimpleEntry<String, ResourceType>(resourceName, resourceType);
+	}
+	
+	private static Entry<String, OracleType> makeEntry(String resourceName, OracleType oracleType) {
+		return new AbstractMap.SimpleEntry<String, OracleType>(resourceName, oracleType);
 	}
 }

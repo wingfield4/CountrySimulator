@@ -6,6 +6,7 @@ import com.countrysim.CountrySimulator.sim.ai.OracleType;
 import com.countrysim.CountrySimulator.sim.ai.Prophecy;
 import com.countrysim.CountrySimulator.sim.resources.ResourcePool;
 import com.countrysim.CountrySimulator.sim.utilities.Config;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Country {
 	private String name;
@@ -13,6 +14,7 @@ public class Country {
 	private Oracle oracle;
 	private Prophecy prophecy;
 	private ResourcePool resourcePool;
+	private CountryPool countryPool;
 	
 	public Country(String name) {
 		this.name = name;
@@ -23,6 +25,7 @@ public class Country {
 	public Country(Country country) {
 		name = country.getName();
 		resourcePool = new ResourcePool(country.getResourcePool());
+		countryPool = country.getCountryPool();
 	}
 	
 	public void initialize() {
@@ -35,8 +38,10 @@ public class Country {
 	public String getName() { return name; }
 	public void setName(String name) { this.name = name; }
 	
-	//public Oracle getOracle() { return oracle; }
 	public Prophecy getProphecy() { return prophecy; }
-	
 	public ResourcePool getResourcePool() { return resourcePool; }
+	
+	@JsonIgnore
+	public CountryPool getCountryPool() { return countryPool; }
+	public void setCountryPool(CountryPool countryPool) { this.countryPool = countryPool; }
 }

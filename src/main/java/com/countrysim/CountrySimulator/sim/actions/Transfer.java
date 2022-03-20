@@ -5,7 +5,7 @@ import com.countrysim.CountrySimulator.sim.resources.ResourceFactory;
 import com.countrysim.CountrySimulator.sim.resources.ResourceType;
 
 public class Transfer extends Action {
-	private static final double RECEIVING_AMOUNT_RATIO = .9;
+	private static final double RECEIVING_AMOUNT_RATIO = .95;
 	
 	private Country initiatingCountry;
 	private Country respondingCountry;
@@ -25,6 +25,7 @@ public class Transfer extends Action {
 		var receivingResource = ResourceFactory.create(receivingResourceType);
 		calculateAmounts();
 		
+		setId("Transfer");
 		setName("Transfer");
 		setDescription("Trade (" + sendingAmount + ") " + sendingResource.getName() + " for (" + receivingAmount + ") " + receivingResource.getName());
 		
@@ -50,6 +51,24 @@ public class Transfer extends Action {
 		
 		double resourceRatio = sendingResource.getWeight()/receivingResource.getWeight();
 		receivingAmount = (int)(sendingAmount*resourceRatio*RECEIVING_AMOUNT_RATIO);
+		
+		//adjust receiving amount based on resources in world
+		int highestSingleCountryAmount = 0;
+		int worldAmount = 0;
+		
+		for(var country : initiatingCountry.getCountryPool().getCountries()) {
+			if(country.getName() != initiatingCountry.getName()) {
+				int countryAmount = country.getResourcePool().getValueMap().get(receivingResourceType);
+				worldAmount += countryAmount;
+				highestSingleCountryAmount = Math.max(countryAmount, highestSingleCountryAmount);
+			}
+		}
+
+		if(worldAmount < receivingAmount) {
+			receivingAmount = 0;
+		} else if(highestSingleCountryAmount < receivingAmount) {
+			receivingAmount = highestSingleCountryAmount;
+		}
 	}
 	
 	public boolean isValid() {

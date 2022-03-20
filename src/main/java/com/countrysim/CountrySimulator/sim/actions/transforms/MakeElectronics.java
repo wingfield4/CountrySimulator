@@ -4,9 +4,10 @@ import com.countrysim.CountrySimulator.sim.countries.Country;
 import com.countrysim.CountrySimulator.sim.resources.ResourceType;
 
 public class MakeElectronics extends Transform {
-	public MakeElectronics(Country country) {
-		super(country);
-		setName("Make Electronics");
+	public MakeElectronics(Country country, int multiplier) {
+		super(country, multiplier);
+		setId("Make Electronics");
+		setName("Make (" + multiplier + ") Electronics");
 		setDescription("Turn Metallic Alloys and Metallic Elements into Electronics");
 		
 		//requirements

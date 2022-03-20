@@ -9,19 +9,21 @@ import com.countrysim.CountrySimulator.sim.resources.ResourceType;
 
 public abstract class Transform extends Action {
 	private Country country;
+	private int multiplier;
 	private Map<ResourceType, Integer> resourceRequirements = new HashMap<ResourceType, Integer>();
 	private Map<ResourceType, Integer> resourceDeltas = new HashMap<ResourceType, Integer>();
 	
-	public Transform(Country country) {
+	public Transform(Country country, int multiplier) {
 		this.country = country;
+		this.multiplier = multiplier;
 	}
 	
 	protected void addResourceDelta(ResourceType resourceType, Integer value) {
-		resourceDeltas.put(resourceType, value);
+		resourceDeltas.put(resourceType, value * multiplier);
 	}
 	
 	protected void addResourceRequirement(ResourceType resourceType, Integer value) {
-		resourceRequirements.put(resourceType, value);
+		resourceRequirements.put(resourceType, value * multiplier);
 	}
 	
 	public boolean isValid() { return isValid(country); };

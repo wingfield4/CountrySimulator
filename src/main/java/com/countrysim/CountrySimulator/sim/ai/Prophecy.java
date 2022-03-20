@@ -16,8 +16,7 @@ public class Prophecy {
 	public Prophecy(List<Action> steps, Country countryState) {
 		this.steps = steps;
 		this.finalCountryState = countryState;
-		
-		//calculate this just the once
+				
 		this.quality = countryState.getResourcePool().getStateQuality();
 	}
 	

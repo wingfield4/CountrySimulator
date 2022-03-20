@@ -20,6 +20,7 @@ public class ConfigService {
 		Config.CONFIG_FILE_NAME = request.getConfigFileName();
 		Config.NUMBER_OF_COUNTRIES = request.getNumberOfCountries();
 		Config.SEARCH_DEPTH = request.getSearchDepth();
+		Config.ORACLE_TYPE = Config.ORACLE_NAME_MAP.get(request.getOracle());
 		
 		//adjust resource distributions
 		Config.RESOURCE_DISTRIBUTIONS
