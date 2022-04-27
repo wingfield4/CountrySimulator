@@ -6,7 +6,7 @@ import com.countrysim.CountrySimulator.sim.resources.ResourceFactory;
 import com.countrysim.CountrySimulator.sim.resources.ResourceType;
 
 public class Transfer extends Action {
-	private static final double RECEIVING_AMOUNT_RATIO = .92;
+	private static final double RECEIVING_AMOUNT_RATIO = .96;
 	
 	private Country initiatingCountry;
 	private Country respondingCountry;

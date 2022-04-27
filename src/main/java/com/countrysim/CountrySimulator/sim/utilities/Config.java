@@ -17,7 +17,7 @@ public class Config {
 	public static String CONFIG_FILE_NAME;
 	public static int NUMBER_OF_COUNTRIES = 10;
 	public static int SEARCH_DEPTH = 30;
-	public static int MAX_TURNS = 3;
+	public static int MAX_TURNS = 10;
 	
 	//expected utility function constants
 	public static double DISCOUNT_GAMMA = .999;
