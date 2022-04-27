@@ -1,5 +1,6 @@
 package com.countrysim.CountrySimulator.sim.actions.transforms;
 
+import com.countrysim.CountrySimulator.sim.actions.Action;
 import com.countrysim.CountrySimulator.sim.countries.Country;
 import com.countrysim.CountrySimulator.sim.resources.ResourceType;
 
@@ -7,8 +8,8 @@ public class MakeHousing extends Transform {
 	public MakeHousing(Country country, int multiplier) {
 		super(country, multiplier);
 		setId("Make Housing");
-		setName("Make (" + multiplier + ") Housing");
-		setDescription("Turn Metallic Alloys, Metallic Elements, and Timber into Housing");
+		setName("Make Housing");
+		setDescription("Make (" + multiplier + ") Housing");
 		
 		//requirements
 		this.addResourceRequirement(ResourceType.MetallicAlloys, 3);
@@ -22,5 +23,9 @@ public class MakeHousing extends Transform {
 		this.addResourceDelta(ResourceType.MetallicAlloys, -3);
 		this.addResourceDelta(ResourceType.MetallicElements, -1);
 		this.addResourceDelta(ResourceType.Timber, -5);
+	}
+	
+	public Action clone(Country country) {
+		return new MakeHousing(country, multiplier);
 	}
 }

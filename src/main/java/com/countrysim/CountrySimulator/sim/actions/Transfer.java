@@ -1,11 +1,12 @@
 package com.countrysim.CountrySimulator.sim.actions;
 
 import com.countrysim.CountrySimulator.sim.countries.Country;
+import com.countrysim.CountrySimulator.sim.countries.TradeProposal;
 import com.countrysim.CountrySimulator.sim.resources.ResourceFactory;
 import com.countrysim.CountrySimulator.sim.resources.ResourceType;
 
 public class Transfer extends Action {
-	private static final double RECEIVING_AMOUNT_RATIO = 1.0;
+	private static final double RECEIVING_AMOUNT_RATIO = .92;
 	
 	private Country initiatingCountry;
 	private Country respondingCountry;
@@ -25,10 +26,13 @@ public class Transfer extends Action {
 		var receivingResource = ResourceFactory.create(receivingResourceType);
 		calculateAmounts();
 		
-		setId("Transfer");
-		setName("Transfer");
-		setDescription("Trade (" + sendingAmount + ") " + sendingResource.getName() + " for (" + receivingAmount + ") " + receivingResource.getName());
-		
+		setId("Propose Transfer");
+		setName("Propose Transfer");
+		setDescription("Proposed trading (" + sendingAmount + ") " + sendingResource.getName() + " for (" + receivingAmount + ") " + receivingResource.getName());
+	}
+	
+	public void setRespondingCountry(Country respondingCountry) {
+		this.respondingCountry = respondingCountry;
 	}
 	
 	private void calculateAmounts() {
@@ -72,7 +76,7 @@ public class Transfer extends Action {
 		}
 	}
 	
-	public boolean isValid() {
+	public boolean isValid(Country respondingCountry) {
 		var sendingResource = ResourceFactory.create(sendingResourceType);
 		var receivingResource = ResourceFactory.create(receivingResourceType);
 		
@@ -91,7 +95,11 @@ public class Transfer extends Action {
 			return false;
 		
 		if(respondingCountry != null) {
-			//TODO check stuff here
+			//fails if we don't actually have the resource
+			if(respondingCountry.getResourcePool().getResourceCount(receivingResourceType) < receivingAmount) {
+				System.out.println("hej");
+				return false;
+			}
 		}
 		
 		//fails if we don't actually have the resource
@@ -101,26 +109,78 @@ public class Transfer extends Action {
 		return true;
 	}
 	
+	//for checking with a specific responding country
+	public boolean isValid() {
+		return isValid(respondingCountry);
+	}
+	
 	//returns true if successfully executed
-	public boolean execute() { return execute(initiatingCountry); }
-	private boolean execute(Country initiatingCountry) {
+	//exxecuting a transfer just return a trade proposal
+	public TradeProposal execute() { return execute(initiatingCountry); }
+	private TradeProposal execute(Country initiatingCountry) {
 		if(!isValid())
-			return false;
+			return null;
 		
-		initiatingCountry.getResourcePool().adjustResource(sendingResourceType, -sendingAmount);
-		initiatingCountry.getResourcePool().adjustResource(receivingResourceType, receivingAmount);
+		return new TradeProposal(initiatingCountry, this);
+	}
+	
+	public void finalize(Country initiatingCountry, Country respondingCountry) {
+		if(initiatingCountry != null) {
+			initiatingCountry.getResourcePool().adjustResource(sendingResourceType, -sendingAmount);
+			initiatingCountry.getResourcePool().adjustResource(receivingResourceType, receivingAmount);
+		}
 		
 		if(respondingCountry != null) {
 			respondingCountry.getResourcePool().adjustResource(sendingResourceType, sendingAmount);
 			respondingCountry.getResourcePool().adjustResource(receivingResourceType, -receivingAmount);
 		}
-		
-		return true;
 	}
 	
 	public Country tryExecute() {
 		Country copy = new Country(initiatingCountry);
-		execute(copy);
+		finalize(copy, null);
 		return copy;
+	}
+	
+	public Country tryExecute(Country country) {
+		Country copy = new Country(country);
+		finalize(null, copy);
+		return copy;
+	}
+	
+	public Action clone(Country country) {
+		return new Transfer(country, transferType, sendingResourceType, receivingResourceType);
+	}
+	
+	public double getStateQualityDelta() {
+		return 0;
+	}
+	
+	public double getInitiatingFinalizedStateQualityDelta() {
+		return tryExecute().getStateQuality() - initiatingCountry.getStateQuality();
+	}
+	
+	public double getRespondingFinalizedStateQualityDelta() {
+		return tryExecute(respondingCountry).getStateQuality() - respondingCountry.getStateQuality();
+	}
+	
+	public String getFinalizedInitiatingDescription() {
+		if(respondingCountry == null)
+			return null;
+		
+		var sendingResource = ResourceFactory.create(sendingResourceType);
+		var receivingResource = ResourceFactory.create(receivingResourceType);
+		return "Finalized trading (" + sendingAmount + ") " + sendingResource.getName() + " for (" + receivingAmount + ") " + receivingResource.getName()
+			 + " with " + respondingCountry.getName();
+	}
+	
+	public String getFinalizedRespondingDescription() {
+		if(initiatingCountry == null)
+			return null;
+		
+		var sendingResource = ResourceFactory.create(sendingResourceType);
+		var receivingResource = ResourceFactory.create(receivingResourceType);
+		return "Agreed to trade (" + receivingAmount + ") " + receivingResource.getName() + " for (" + sendingAmount + ") " + sendingResource.getName()
+			 + " with " + initiatingCountry.getName();
 	}
 }

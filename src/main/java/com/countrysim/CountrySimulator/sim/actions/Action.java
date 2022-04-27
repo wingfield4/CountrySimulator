@@ -1,6 +1,7 @@
 package com.countrysim.CountrySimulator.sim.actions;
 
 import com.countrysim.CountrySimulator.sim.countries.Country;
+import com.countrysim.CountrySimulator.sim.countries.TradeProposal;
 import com.countrysim.CountrySimulator.sim.resources.ResourcePool;
 
 public abstract class Action {
@@ -10,8 +11,10 @@ public abstract class Action {
 	private double probabilityOfSuccess = 1.0;
 	
 	public abstract boolean isValid();
-	public abstract boolean execute();
+	public abstract TradeProposal execute();
 	public abstract Country tryExecute();
+	public abstract Action clone(Country country);
+	public abstract double getStateQualityDelta();
 	
 	//getters and setters
 	public String getId() { return id; }

@@ -62,6 +62,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+			        <!-- disable process forking that is enabled by default in spring-boot 2.2.0.RELEASE and higher -->
+			        <fork>false</fork>
+			    </configuration>
 			</plugin>
 		</plugins>
 	</build>
