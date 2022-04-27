@@ -47,16 +47,30 @@ public class GameMaster {
 	//game loop
 	private void startGame() {
 		int turns = 0;
+		
+		//until we run out of turns
 		while(turns < Config.MAX_TURNS) {
 			
 			int countryIndex = 0;
 			for(var country : countryPool.getCountries()) {
+				
+				//returns a tradeProposal if proposing a trade after turn
 				var trade = country.takeTurn();
 				
+				//if there's a trade proposal...
 				if(trade != null) {
+					//update the clients about the trade proposal
+					sendUpdate();
+					
+					//a trade proposal isn't makde to a specific country, cause the 'asker' doesn't really care
+					//so we see if any country (other than the proposer) will accept the trade
 					for(var targetCountry : countryPool.getCountries()) {
 						if(targetCountry != country && targetCountry.contemplateTrade(trade)) {
+							//we found a match yay
 							trade.getTransfer().setRespondingCountry(targetCountry);
+							
+							//add some metadata you our countries. should probably extract this logic
+							//but some spaghetti code kinda requires it be here. TODO revisit
 							country.addActionSummary(
 									new ActionSummary(
 											"Transfer",
@@ -69,18 +83,24 @@ public class GameMaster {
 											trade.getTransfer().getName(), 
 											trade.getTransfer().getFinalizedRespondingDescription(), 
 											trade.getTransfer().getRespondingFinalizedStateQualityDelta()));
+							
+							//execute the trade for both countries
 							trade.execute(targetCountry);
-							sendUpdate();
+							
+							//stop look for trade partners
 							break;
 						}
 					}
 				}
 				
+				//update who's taking their turn
 				country.setTakingTurn(false);
 				countryPool.getCountries().get((countryIndex + 1) % countryPool.getCountries().size()).setTakingTurn(true);
 				
+				//update the clients
 				sendUpdate();
 				
+				//should i just make this a for loop, idk
 				countryIndex++;
 			}
 			
@@ -89,6 +109,7 @@ public class GameMaster {
 	}
 
 	//custom initialization
+	//TODO I should stick this in a super class or something
 	private void initializeWithGeneration() {
 		int numberOfCountries = Config.NUMBER_OF_COUNTRIES;
 		

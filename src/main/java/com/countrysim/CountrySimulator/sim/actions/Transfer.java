@@ -4,6 +4,7 @@ import com.countrysim.CountrySimulator.sim.countries.Country;
 import com.countrysim.CountrySimulator.sim.countries.TradeProposal;
 import com.countrysim.CountrySimulator.sim.resources.ResourceFactory;
 import com.countrysim.CountrySimulator.sim.resources.ResourceType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Transfer extends Action {
 	private static final double RECEIVING_AMOUNT_RATIO = .96;
@@ -155,15 +156,18 @@ public class Transfer extends Action {
 	public double getStateQualityDelta() {
 		return 0;
 	}
-	
+
+	@JsonIgnore
 	public double getInitiatingFinalizedStateQualityDelta() {
 		return tryExecute().getStateQuality() - initiatingCountry.getStateQuality();
 	}
 	
+	@JsonIgnore
 	public double getRespondingFinalizedStateQualityDelta() {
 		return tryExecute(respondingCountry).getStateQuality() - respondingCountry.getStateQuality();
 	}
-	
+
+	@JsonIgnore
 	public String getFinalizedInitiatingDescription() {
 		if(respondingCountry == null)
 			return null;
@@ -173,7 +177,8 @@ public class Transfer extends Action {
 		return "Finalized trading (" + sendingAmount + ") " + sendingResource.getName() + " for (" + receivingAmount + ") " + receivingResource.getName()
 			 + " with " + respondingCountry.getName();
 	}
-	
+
+	@JsonIgnore
 	public String getFinalizedRespondingDescription() {
 		if(initiatingCountry == null)
 			return null;
