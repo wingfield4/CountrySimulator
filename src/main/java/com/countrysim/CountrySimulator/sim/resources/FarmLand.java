@@ -4,7 +4,7 @@ public class FarmLand extends PopulationDependentResource {
 	public FarmLand() {
 		setResourceType(ResourceType.FarmLand);
 		setName("Farm Land");
-		setWeight(10);
+		setWeight(15);
 		setTradeable(false);
 	}
 }

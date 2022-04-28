@@ -13,10 +13,14 @@ public class MakeFarmLand extends Transform {
 		
 		//requirements
 		this.addResourceRequirement(ResourceType.AvailableLand, 1);
+		this.addResourceRequirement(ResourceType.MetallicAlloys, 2);
+		this.addResourceRequirement(ResourceType.Timber, 5);
 		this.addResourceRequirement(ResourceType.Population, 5);
 		
 		//deltas
 		this.addResourceDelta(ResourceType.AvailableLand, -1);
+		this.addResourceDelta(ResourceType.MetallicAlloys, -2);
+		this.addResourceDelta(ResourceType.Timber, -5);
 		this.addResourceDelta(ResourceType.FarmLand, 1);
 	}
 	
