@@ -14,6 +14,8 @@ public class ActionFactory {
 		switch(transformType) {
 			case MakeElectronics:
 				return new MakeElectronics(country, multiplier);
+			case MakeFarmLand:
+				return new MakeFarmLand(country, multiplier);
 			case MakeHousing:
 				return new MakeHousing(country, multiplier);
 			case MakeMetallicAlloys:

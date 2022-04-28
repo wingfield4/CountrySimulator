@@ -28,9 +28,13 @@ public class ConfigService {
 		
 		//adjust resource distributions
 		Config.RESOURCE_DISTRIBUTIONS
+			.replace(ResourceType.AvailableLand, new NormalDistribution(request.getAvailableLandRange()[0], request.getAvailableLandRange()[1]));
+		Config.RESOURCE_DISTRIBUTIONS
 			.replace(ResourceType.Electronics, new NormalDistribution(request.getElectronicsRange()[0], request.getElectronicsRange()[1]));
 		Config.RESOURCE_DISTRIBUTIONS
 			.replace(ResourceType.ElectronicsWaste, new NormalDistribution(request.getElectronicsWasteRange()[0], request.getElectronicsWasteRange()[1]));
+		Config.RESOURCE_DISTRIBUTIONS
+			.replace(ResourceType.FarmLand, new NormalDistribution(request.getFarmLandRange()[0], request.getFarmLandRange()[1]));
 		Config.RESOURCE_DISTRIBUTIONS
 			.replace(ResourceType.Housing, new NormalDistribution(request.getHousingRange()[0], request.getHousingRange()[1]));
 		Config.RESOURCE_DISTRIBUTIONS

@@ -11,8 +11,10 @@ public class RunSimulationRequest {
 	private int discountOffset;
 	private int probabilityPenalty;
 	
+	private int[] availableLandRange;
 	private int[] electronicsRange;
 	private int[] electronicsWasteRange;
+	private int[] farmLandRange;
 	private int[] housingRange;
 	private int[] housingWasteRange;
 	private int[] metallicAlloysRange;
@@ -46,11 +48,17 @@ public class RunSimulationRequest {
 	public int getProbabilityPenalty() { return probabilityPenalty; }
 	public void setProbabilityPenalty(int probabilityPenalty) { this.probabilityPenalty = probabilityPenalty; }
 	
+	public int[] getAvailableLandRange() { return availableLandRange; }
+	public void setAvailableLandRange(int[] availableLandRange) { this.availableLandRange = availableLandRange; }
+	
 	public int[] getElectronicsRange() { return electronicsRange; }
 	public void setElectronicsRange(int[] electronicsRange) { this.electronicsRange = electronicsRange; }
 	
 	public int[] getElectronicsWasteRange() { return electronicsWasteRange; }
 	public void setElectronicsWasteRange(int[] electronicsWasteRange) { this.electronicsWasteRange = electronicsWasteRange; }
+	
+	public int[] getFarmLandRange() { return farmLandRange; }
+	public void setFarmLandRange(int[] farmLandRange) { this.farmLandRange = farmLandRange; }
 	
 	public int[] getHousingRange() { return housingRange; }
 	public void setHousingRange(int[] housingRange) { this.housingRange = housingRange; }

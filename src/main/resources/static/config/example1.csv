@@ -1,7 +1,7 @@
-Country,Population,Electronics,ElectronicsWaste,Housing,HousingWaste,MetallicAlloys,MetallicAlloysWaste,MetallicElements,Timber
-Atraria,5,0,0,5,0,0,0,1000,1000
-Braogua,10,400,0,10,0,400,0,0,0
-Cluic Stistan,5,0,0,0,0,0,0,100,100
-Doshaibia,20,0,0,20,0,0,0,100,100
-Iapreistan,45,0,0,0,0,0,0,1000,1000
-Jaspiadan,50,0,0,0,0,0,0,1000,1000
+Country,Population,Electronics,ElectronicsWaste,Housing,HousingWaste,MetallicAlloys,MetallicAlloysWaste,MetallicElements,Timber,AvailableLand,FarmLand
+Atraria,5,0,0,5,0,0,0,1000,1000,50,10
+Braogua,10,400,0,10,0,400,0,0,0,20,20
+Cluic Stistan,5,0,0,0,0,0,0,100,100,20,10
+Doshaibia,20,0,0,20,0,0,0,100,100,20,40
+Iapreistan,45,0,0,40,0,0,0,1000,1000,50,20
+Jaspiadan,50,0,0,0,0,0,0,1000,1000,50,1000

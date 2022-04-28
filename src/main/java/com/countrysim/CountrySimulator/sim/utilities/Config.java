@@ -62,26 +62,30 @@ public class Config {
 	//resources per-country distributions
 	//the wrapper makes it mutable
 	public static Map<ResourceType, Distribution> RESOURCE_DISTRIBUTIONS = new HashMap<>(Map.ofEntries(
-			makeEntry(ResourceType.Population, new NormalDistribution(1, 40)),
+			makeEntry(ResourceType.AvailableLand, new NormalDistribution(1, 40)),
 			makeEntry(ResourceType.Electronics, new NormalDistribution(0, 0)),
 			makeEntry(ResourceType.ElectronicsWaste, new NormalDistribution(0, 0)),
+			makeEntry(ResourceType.FarmLand, new NormalDistribution(0, 40)),
 			makeEntry(ResourceType.Housing, new NormalDistribution(1, 10)),
 			makeEntry(ResourceType.HousingWaste, new NormalDistribution(0, 0)),
 			makeEntry(ResourceType.MetallicAlloys, new NormalDistribution(0, 0)),
 			makeEntry(ResourceType.MetallicAlloysWaste, new NormalDistribution(0, 0)),
 			makeEntry(ResourceType.MetallicElements, new NormalDistribution(1, 200)),
+			makeEntry(ResourceType.Population, new NormalDistribution(1, 40)),
 			makeEntry(ResourceType.Timber, new NormalDistribution(1, 200))
 		));
 	
 	public static Map<String, ResourceType> RESOURCE_NAME_MAP = new HashMap<>(Map.ofEntries(
-			makeEntry("Population", ResourceType.Population),
+			makeEntry("AvailableLand", ResourceType.AvailableLand),
 			makeEntry("Electronics", ResourceType.Electronics),
 			makeEntry("ElectronicsWaste", ResourceType.ElectronicsWaste),
+			makeEntry("FarmLand", ResourceType.FarmLand),
 			makeEntry("Housing", ResourceType.Housing),
 			makeEntry("HousingWaste", ResourceType.HousingWaste),
 			makeEntry("MetallicAlloys", ResourceType.MetallicAlloys),
 			makeEntry("MetallicAlloysWaste", ResourceType.MetallicAlloysWaste),
 			makeEntry("MetallicElements", ResourceType.MetallicElements),
+			makeEntry("Population", ResourceType.Population),
 			makeEntry("Timber", ResourceType.Timber)
 		));
 

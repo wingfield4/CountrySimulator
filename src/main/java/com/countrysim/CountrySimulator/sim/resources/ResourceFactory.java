@@ -3,10 +3,14 @@ package com.countrysim.CountrySimulator.sim.resources;
 public class ResourceFactory {
 	public static Resource create(ResourceType resourceType) {
 		switch(resourceType) {
+			case AvailableLand:
+				return new AvailableLand();
 			case Electronics:
 				return new Electronics();
 			case ElectronicsWaste:
 				return new ElectronicsWaste();
+			case FarmLand:
+				return new FarmLand();
 			case Housing:
 				return new Housing();
 			case HousingWaste:
