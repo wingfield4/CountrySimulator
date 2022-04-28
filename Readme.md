@@ -8,8 +8,10 @@
 - Navigate to localhost:3000
 - Configure the Settings and hit 'Run Simulation
 
-### Points of Interest
+### Code - Points of Interest
 
-Most simulation logic is here: https://github.com/wingfield4/CountrySimulator/tree/master/src/main/java/com/countrysim/CountrySimulator/sim
+['Prune-at-depth' Search Algorithm](https://github.com/wingfield4/CountrySimulator/blob/master/src/main/java/com/countrysim/CountrySimulator/sim/ai/PruneAtDepthOracle.java)
+['Simple Beam' Search Algorithm](https://github.com/wingfield4/CountrySimulator/blob/master/src/main/java/com/countrysim/CountrySimulator/sim/ai/SimpleBeamOracle.java)
+[Game Loop](https://github.com/wingfield4/CountrySimulator/blob/master/src/main/java/com/countrysim/CountrySimulator/sim/GameMaster.java)
 
 The "ai" folder contains two searching algorithms: "PruneAtDepthOracle" and "SimpleBeamOracle"
